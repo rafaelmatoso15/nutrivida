@@ -1,0 +1,2 @@
+/* Cálculo de nutrientes a partir dos ingredientes selecionados no banco. */
+window.NVRecipe={sum(recipe,foods){const total=Object.fromEntries(NV.nutrients.map(k=>[k,0]));(recipe.ingredients||[]).forEach(i=>{const f=foods.find(x=>x.id===i.foodId);if(!f)return;const grams=NV.num(i.grams);NV.nutrients.forEach(k=>total[k]+=NV.num(f[k])*grams/NV.num(f.serving||100))});return total},perServing(recipe,foods){const t=this.sum(recipe,foods);return Object.fromEntries(Object.entries(t).map(([k,v])=>[k,v/Math.max(1,NV.num(recipe.servings))]))}};

@@ -1,0 +1,2 @@
+/* Cálculo estimado de gasto energético usando MET. */
+window.NVCardio={activities:[['Caminhada',3.5,4.5,5.5],['Corrida',6,9,12],['Esteira',4,7,10],['Bicicleta',4,7,10],['Bicicleta ergométrica',3.5,6,9],['Elíptico',4,6,8],['Natação',5,8,10],['Remo',4,7,10],['Pular corda',8,11,12],['HIIT',6,9,12],['Escada',5,8,10]].map(x=>({name:x[0],light:x[1],moderate:x[2],intense:x[3]})),kcal(met,kg,minutes){return NV.round(NV.num(met)*NV.num(kg)*NV.num(minutes)/60)}};

@@ -1,0 +1,8 @@
+/* Camada de persistência: IndexedDB como armazenamento principal, com recuperação local quando indisponível. */
+window.NVDB={name:'nutrivida-db',version:2,stores:['foods','recipes','entries','water','weights','measures','exercises','plans','workouts','cardio','activities','notes','photos','profile','settings'],db:null,
+open(){return new Promise((resolve,reject)=>{if(!('indexedDB'in window)){reject(Error('IndexedDB indisponível'));return}const req=indexedDB.open(this.name,this.version);req.onupgradeneeded=()=>{const d=req.result;this.stores.forEach(s=>{if(!d.objectStoreNames.contains(s))d.createObjectStore(s,{keyPath:'id'})})};req.onsuccess=()=>{this.db=req.result;resolve(this.db)};req.onerror=()=>reject(req.error)})},
+all(store){return new Promise((resolve,reject)=>{const r=this.db.transaction(store,'readonly').objectStore(store).getAll();r.onsuccess=()=>resolve(r.result||[]);r.onerror=()=>reject(r.error)})},
+put(store,obj){return new Promise((resolve,reject)=>{const r=this.db.transaction(store,'readwrite').objectStore(store).put(obj);r.onsuccess=()=>resolve(obj);r.onerror=()=>reject(r.error)})},
+remove(store,id){return new Promise((resolve,reject)=>{const r=this.db.transaction(store,'readwrite').objectStore(store).delete(id);r.onsuccess=()=>resolve();r.onerror=()=>reject(r.error)})},
+clear(){return Promise.all(this.stores.map(s=>new Promise((resolve,reject)=>{const r=this.db.transaction(s,'readwrite').objectStore(s).clear();r.onsuccess=resolve;r.onerror=()=>reject(r.error)})))},
+replaceAll(payload){return this.clear().then(()=>Promise.all(this.stores.map(s=>Promise.all((payload[s]||[]).map(o=>this.put(s,o))))))}};
