@@ -1,5 +1,5 @@
 /* Camada de persistência: IndexedDB como armazenamento principal, com recuperação local quando indisponível. */
-window.NVDB={name:'nutrivida-db',version:2,stores:['foods','recipes','entries','water','weights','measures','exercises','plans','workouts','cardio','activities','notes','photos','profile','settings'],db:null,
+window.NVDB={name:'nutrivida-db',version:3,stores:['foods','recipes','entries','mealLogs','water','weights','measures','exercises','plans','workouts','cardio','activities','notes','photos','profile','settings'],db:null,
 open(){return new Promise((resolve,reject)=>{if(!('indexedDB'in window)){reject(Error('IndexedDB indisponível'));return}const req=indexedDB.open(this.name,this.version);req.onupgradeneeded=()=>{const d=req.result;this.stores.forEach(s=>{if(!d.objectStoreNames.contains(s))d.createObjectStore(s,{keyPath:'id'})})};req.onsuccess=()=>{this.db=req.result;resolve(this.db)};req.onerror=()=>reject(req.error)})},
 all(store){return new Promise((resolve,reject)=>{const r=this.db.transaction(store,'readonly').objectStore(store).getAll();r.onsuccess=()=>resolve(r.result||[]);r.onerror=()=>reject(r.error)})},
 put(store,obj){return new Promise((resolve,reject)=>{const r=this.db.transaction(store,'readwrite').objectStore(store).put(obj);r.onsuccess=()=>resolve(obj);r.onerror=()=>reject(r.error)})},

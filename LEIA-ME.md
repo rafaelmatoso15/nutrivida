@@ -18,5 +18,8 @@ O app começa com 18 alimentos brasileiros de referência e uma biblioteca de 94
 Sem login ou sincronização em nuvem: os dados ficam no armazenamento do navegador/aparelho. Limpar os dados do navegador pode apagá-los; mantenha backups. Não há vitaminas no catálogo, por escolha do escopo solicitado.
 
 
+## Diário alimentar
+A aba **Diário** reúne o registro de alimentos da base, receitas e cadastro rápido de novos alimentos. O app calcula calorias e macros consumidos e restantes a partir das metas do perfil, organiza refeições configuráveis, permite copiar itens escolhidos de qualquer refeição/dia e oferece sugestões acionadas individualmente em cada refeição, com base nos alimentos e receitas salvos. Os registros antigos continuam preservados e entram no mesmo saldo e no histórico; novos lançamentos são editáveis e aparecem nos relatórios e backups.
+
 ## Progressão de musculação
 Na aba **Treinos**, inicie uma ficha ou um treino avulso. Para cada exercício, registre carga e repetições série a série, marque as séries concluídas e use o botão de descanso configurável. O app mostra a sessão anterior e recordes, mantém histórico editável e apresenta gráficos de carga e volume. O backup JSON inclui os registros detalhados; ao importar um backup antigo, os treinos antigos continuam legíveis.
