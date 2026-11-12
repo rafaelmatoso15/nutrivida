@@ -34,3 +34,9 @@
 /* Edição de metas diárias */
 .targets-grid{margin-bottom:12px}.pace-field{grid-column:1/-1}.pace-control{display:flex;align-items:stretch;gap:8px}.pace-control input{flex:1;min-width:0;border:1px solid var(--line);background:var(--bg);color:var(--text);border-radius:11px;padding:11px 12px;min-height:44px}.pace-control .btn{flex:0 0 auto}.target-values{margin-top:12px}.targets-grid>.source-note.full{grid-column:1/-1;margin:0}
 @media(max-width:520px){.pace-control{align-items:stretch;flex-direction:column}.pace-control .btn{width:100%}}
+
+/* Filtros e resumo do histórico de atividades */
+.history-filters{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:0 0 16px;padding:14px;background:var(--panel);border:1px solid var(--line);border-radius:15px}.history-filters label{display:grid;gap:6px;font-size:13px;font-weight:650;color:var(--muted)}
+@media(max-width:900px){.history-filters{grid-template-columns:1fr 1fr}.history-filters label:first-child{grid-column:1/-1}}
+@media(max-width:520px){.history-filters{grid-template-columns:1fr}.history-filters label:first-child{grid-column:auto}.history-summary{grid-template-columns:1fr 1fr}}
+.profile-history-stack{display:grid;gap:12px}
