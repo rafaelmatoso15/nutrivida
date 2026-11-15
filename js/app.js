@@ -8,7 +8,7 @@ const $=s=>document.querySelector(s),esc=NV.escape;
 window.addEventListener('nv-auth-changed',e=>handleAuth(e.detail?.user||null));
 window.addEventListener('nv-data-changed',async()=>{if(!NVDB.ready)return;await refresh();if(!$('#modal-root').innerHTML&&appReady)render()});
 window.addEventListener('nv-cloud-error',e=>{if(e.detail?.errorMessage)NV.toast(e.detail.errorMessage)});
-function setupNav(){const markup=nav.map(([id,icon,label])=>`<a href="#${id}" class="nav-link ${id===page?'active':''}" data-page="${id}"><span class="nav-icon">${icon}</span><span>${label}</span></a>`).join('');$('#side-nav').innerHTML=markup;$('#bottom-nav').innerHTML=markup;document.querySelectorAll('[data-page]').forEach(a=>a.onclick=e=>{e.preventDefault();page=a.dataset.page;if(page==='foods'){foodFilter='';foodCategoryFilter=''}render()})}
+function setupNav(){const markup=nav.filter(([id])=>id!=='settings').map(([id,icon,label])=>`<a href="#${id}" class="nav-link ${id===page?'active':''}" data-page="${id}"><span class="nav-icon">${icon}</span><span>${label}</span></a>`).join('');$('#side-nav').innerHTML=markup;$('#bottom-nav').innerHTML=markup;document.querySelectorAll('[data-page]').forEach(a=>a.onclick=e=>{e.preventDefault();page=a.dataset.page;if(page==='foods'){foodFilter='';foodCategoryFilter=''}render()})}
 function navTitle(){const d=new Date(day+'T12:00:00');$('#today-label').textContent=d.toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'long'});$('#page-title').textContent=titles[page]||page}
 async function refresh(){for(const s of NVDB.stores)data[s]=await NVDB.all(s);}
 const profile=()=>data.profile?.[0]||{id:'profile',sex:'masculino',birth:'',height:170,weight:70,bodyFat:null,trainingMinutes:0,activity:'sedentário',goal:'manter'};
@@ -133,7 +133,7 @@ async function handleAuth(user){
  if(!user){launchId++;launchInProgress=false;appReady=false;activeUid='';NVDB.disconnect();$('.app-shell').hidden=true;renderAuth();return}
  if(activeUid===user.uid&&(appReady||launchInProgress))return;
  const id=++launchId;activeUid=user.uid;launchInProgress=true;appReady=false;authBusy=true;renderAuth('Carregando seus dados e sincronizando com a nuvem…');
- try{await NVDB.open(user);if(id!==launchId)return;await ensureSeedData();await migrateSeedExerciseGroups();await refresh();if(id!==launchId)return;launchInProgress=false;authBusy=false;appReady=true;cloudUser=user;$('#auth-root').hidden=true;$('.app-shell').hidden=false;$('#quick-theme').onclick=toggleTheme;$('#mobile-menu').onclick=()=>{page='home';render()};render()}
+ try{await NVDB.open(user);if(id!==launchId)return;await ensureSeedData();await migrateSeedExerciseGroups();await refresh();if(id!==launchId)return;launchInProgress=false;authBusy=false;appReady=true;cloudUser=user;$('#auth-root').hidden=true;$('.app-shell').hidden=false;$('#open-settings').onclick=()=>{page='settings';render()};render()}
  catch(error){if(id!==launchId)return;launchInProgress=false;authBusy=false;NVDB.disconnect();activeUid=user.uid;renderAuth(NVCloud.errorMessage(error))}
 }
 
