@@ -1,5 +1,5 @@
 // Cache de recursos estáticos do app; login e dados exigem internet.
-const CACHE='nutrivida-v21-cloud-auth-settings-header';
+const CACHE='nutrivida-v22-account-menu-profile-goal';
 const FILES=['./','./index.html','./manifest.json','./css/style.css','./js/firebase.js','./js/db.js','./js/utils.js','./js/perfil.js','./js/alimentos.js','./js/receitas.js','./js/diario.js','./js/prato.js','./js/agua.js','./js/treinos.js','./js/cardio.js','./js/relatorios.js','./js/backup.js','./js/app.js','./icons/icon.svg','./icons/icon-192.png','./icons/icon-512.png','./data/taco.json','./data/exercicios.json','./data/cardio.json'];
 self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(FILES))));
 self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k))))));
