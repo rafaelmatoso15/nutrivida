@@ -1,25 +1,58 @@
 # NutriVida — nutrição e treinos
 
-Aplicativo pessoal em HTML, CSS e JavaScript puro, sem conta e sem dependências externas. Os dados são mantidos localmente no navegador usando IndexedDB.
+Aplicativo pessoal em HTML, CSS e JavaScript puro, com Firebase Authentication e Cloud Firestore. O acesso exige entrar com e-mail/senha ou Google e estar conectado à internet. Os registros são mantidos na nuvem, vinculados ao UID autenticado; o Firestore usa cache em memória, sem guardar os dados do app no IndexedDB do navegador.
 
-## Abrir no computador
-Extraia o ZIP e abra `index.html` em um navegador atualizado. Para uso básico, o app funciona por arquivo local; permissões de instalação PWA e service worker exigem hospedagem HTTPS ou um servidor local (`localhost`).
+## Configuração necessária no Firebase
 
-## Instalar no celular
-Para instalar e aproveitar o modo offline, publique a pasta em um host estático HTTPS gratuito, como GitHub Pages ou Netlify. Abra a URL no navegador do celular e use a opção “Adicionar à tela inicial”/“Instalar app”. Faça uma primeira visita conectado para baixar os recursos offline. Para uso entre computador e celular, exporte o JSON em um dispositivo e importe no outro.
+No projeto Firebase usado pelo app, confirme:
 
-## Backup e restauração
-Na tela **Config.**, use **Exportar todos os dados** para baixar um JSON. Guarde-o fora do aparelho e exporte semanalmente. Para restaurar/migrar, use **Importar backup JSON** no outro navegador. O backup substitui os dados locais atuais.
+1. **Authentication → Método de login:** E-mail/senha e Google ativados. Para o Google, configure também o e-mail de suporte.
+2. **Authentication → Configurações → Domínios autorizados:** adicione o domínio onde o app será publicado (por exemplo, `seuusuario.github.io`).
+3. **Firestore Database:** banco criado e regras publicadas. As regras precisam permitir acesso somente ao UID autenticado. A estrutura usada pelo app é `usuarios/<UID>/<coleção>/<documento>`.
 
-## Base de alimentos
-O app começa com 18 alimentos brasileiros de referência e uma biblioteca de 94 exercícios. A base disponibilizada é reduzida e **não é a TACO completa oficial**; a tela Alimentos permite importar CSV/JSON e baixar um modelo CSV. Os valores de referência devem ser conferidos e podem ser editados.
+Regras compatíveis com essa estrutura:
 
-## Privacidade e limites
-Sem login ou sincronização em nuvem: os dados ficam no armazenamento do navegador/aparelho. Limpar os dados do navegador pode apagá-los; mantenha backups. Não há vitaminas no catálogo, por escolha do escopo solicitado.
+```text
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /usuarios/{uid}/{documento=**} {
+      allow read, write: if request.auth != null && request.auth.uid == uid;
+    }
+  }
+}
+```
 
+Não use regras abertas para todos. A configuração web do Firebase está no app; a segurança depende da autenticação e das regras do Firestore.
 
-## Diário alimentar
-A aba **Diário** reúne o registro de alimentos da base, receitas e cadastro rápido de novos alimentos. O app calcula calorias e macros consumidos e restantes a partir das metas do perfil, organiza refeições configuráveis, permite copiar itens escolhidos de qualquer refeição/dia e oferece sugestões acionadas individualmente em cada refeição, com base nos alimentos e receitas salvos. Os registros antigos continuam preservados e entram no mesmo saldo e no histórico; novos lançamentos são editáveis e aparecem nos relatórios e backups.
+## Publicação e primeiro acesso
 
-## Treinos e histórico
-Na aba **Treinos**, as fichas ficam no topo, com atalhos para criar uma ficha ou iniciar um treino. As bibliotecas de exercícios e cardio ficam recolhidas até serem abertas; a biblioteca de exercícios permite filtrar por grupo muscular. A progressão por exercício permanece em **Treinos**, com sessão anterior, recordes e gráficos de carga e volume. Para cada exercício, registre carga e repetições série a série, marque as séries concluídas e use o descanso configurável. A aba **Histórico** reúne apenas os treinos e cardios realizados, com filtros por dia, semana, mês, últimos dias ou intervalo personalizado, além de um resumo do período. O backup JSON inclui os registros detalhados; ao importar um backup antigo, os treinos antigos continuam legíveis.
+Publique o conteúdo desta pasta em um host estático HTTPS, como GitHub Pages. Abra o endereço publicado com internet e crie uma conta com e-mail/senha ou entre com Google. A sessão pode permanecer ativa neste navegador; em cada aparelho é preciso entrar na conta pelo menos uma vez.
+
+Após entrar, os dados da conta são carregados e ficam sincronizados automaticamente. Alterações feitas em outro aparelho conectado aparecem no NutriVida sem exportar/importar arquivos. Para usar o app, manter conexão com a internet; o conteúdo estático pode ficar em cache para instalação, mas os dados pessoais não ficam disponíveis offline.
+
+## Migração automática dos dados existentes
+
+Na primeira entrada desta versão, o app verifica o IndexedDB da versão anterior no mesmo navegador e endereço publicado. Se encontrar registros, envia-os para a conta autenticada antes de remover o banco local antigo. Se já houver dados ativos na conta, acrescenta registros locais com IDs ausentes e preserva o registro ativo da nuvem quando há conflito. Se houver apenas um backup antigo do app no Firestore, ele é migrado e o registro local prevalece quando o mesmo ID também existe.
+
+O banco antigo só é apagado depois que a migração para o Firestore termina com sucesso. Se a migração falhar, os dados locais antigos não são apagados; confira a mensagem e tente novamente com internet. Feche outras abas antigas do NutriVida se o navegador informar que o armazenamento está aberto em outro lugar. Recomenda-se exportar um backup JSON na versão anterior antes de publicar esta atualização.
+
+## Alimentos e bibliotecas de referência
+
+Uma conta sem dados recebe **18 alimentos brasileiros de referência**, além das bibliotecas iniciais de exercícios e cardio. Esse conjunto é reduzido e não representa a tabela TACO oficial completa; valores são aproximações editáveis e devem ser conferidos em rótulos ou fontes confiáveis.
+
+## Cópia de segurança
+
+Em **Config.**, é possível exportar um backup JSON. A importação substitui os dados atuais da conta e sincroniza a substituição nos aparelhos conectados. Guarde os arquivos exportados fora do dispositivo. O Firestore também está sujeito às cotas do plano Firebase escolhido.
+
+## Observações técnicas
+
+- O app permanece em HTML/CSS/JavaScript puro, sem frameworks ou servidor próprio.
+- Os dados são sincronizados por listeners do Firestore e atualizações por registro.
+- O Firebase Auth guarda a sessão de login neste navegador; isso não inclui os registros pessoais do NutriVida.
+- A remoção de todos os dados pela tela de Configurações apaga os registros ativos e cópias antigas da nuvem.
+- Não publique regras de banco permissivas e não compartilhe senhas.
+
+## Funcionalidades preservadas
+
+O app mantém as abas Início, Diário, Alimentos, Treinos, Histórico, Relatórios, Perfil e Config. Inclui registro alimentar e de água, receitas, perfil e metas, fichas e séries de treino, cardio, histórico e exportação de backup/CSV.
