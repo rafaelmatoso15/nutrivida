@@ -81,6 +81,9 @@
  .home-macro strong{display:block;margin-top:2px;font-size:10px;white-space:nowrap;font-variant-numeric:tabular-nums}
  .home-macro .progress{height:4px;margin:6px 0 0}
  .plate-summary{padding:15px;border-radius:16px}
+ .plate-summary .plate-meter small{display:none}
+ .plate-summary .plate-meter-calories{display:none}
+ .plate-summary .plate-meter-fiber{display:block}
  .plate-summary-head{align-items:flex-start;flex-direction:column;gap:7px}
  .plate-summary-head>div{min-width:0}
  .plate-summary-head strong{font-size:30px;line-height:1.2}
