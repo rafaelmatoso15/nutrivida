@@ -75,8 +75,22 @@
  .home-macros-mobile{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin-top:12px}
  .home-nutrient-summary{display:none}
  .home-macro{min-width:0;padding:8px 7px;border-radius:10px;background:color-mix(in srgb,var(--panel) 65%,transparent)}
- .home-macro span{display:block;color:var(--muted);font-size:11px;font-weight:750}
- .home-macro strong{display:block;margin-top:2px;font-size:11px;white-space:nowrap;font-variant-numeric:tabular-nums}
+ .home-goal-desktop{display:none}
+ .home-goal-mobile{display:inline;font-weight:800}
+ .home-macro span{display:block;color:var(--muted);font-size:10px;font-weight:750;white-space:nowrap}
+ .home-macro strong{display:block;margin-top:2px;font-size:10px;white-space:nowrap;font-variant-numeric:tabular-nums}
  .home-macro .progress{height:4px;margin:6px 0 0}
+ .plate-summary{padding:15px;border-radius:16px}
+ .plate-summary-head{align-items:flex-start;flex-direction:column;gap:7px}
+ .plate-summary-head>div{min-width:0}
+ .plate-summary-head strong{font-size:30px;line-height:1.2}
+ .plate-summary-head .pill{font-size:11px;white-space:normal}
+ .plate-meters{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin-top:10px}
+ .plate-summary .plate-meter{min-width:0;padding:9px;border-radius:10px;background:color-mix(in srgb,var(--panel) 65%,transparent)}
+ .plate-summary .plate-meter>div:first-child{display:block}
+ .plate-summary .plate-meter>div:first-child span{display:block;font-size:10px;font-weight:750;color:#c0d7ca}
+ .plate-summary .plate-meter>div:first-child b{display:block;margin-top:2px;text-align:left;font-size:11px;white-space:normal;color:#fff}
+ .plate-summary .plate-meter .progress{height:4px;margin:6px 0}
+ .plate-summary .plate-meter small{font-size:10px;line-height:1.3;color:#c0d7ca}
 }
 
