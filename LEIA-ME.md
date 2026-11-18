@@ -62,6 +62,8 @@ Em **Config.**, é possível exportar um backup JSON. A importação substitui o
 - A opção “Alimentos” saiu da navegação principal e fica no menu da engrenagem, logo abaixo de “Perfil”, como “Alimentos e Receitas”; o atalho foi removido da tela Configurações.
 - No Diário, “＋ Adicionar” abre um formulário identificado pelo nome da refeição, sem campo para escolher a refeição novamente.
 - A busca do Diário reúne alimentos e receitas, indica o tipo e sugere correspondências pelo início do nome digitado.
+- O resumo nutricional das receitas segue o padrão de alimentos, exibindo valores por 100 g.
+- No cadastro de receitas, os ingredientes são sugeridos ao digitar o início do nome do alimento.
 - A Meta de hoje mostra a meta calórica uma única vez, em negrito.
 
 ## Funcionalidades preservadas
