@@ -53,6 +53,20 @@ Em **Config.**, é possível exportar um backup JSON. A importação substitui o
 - A remoção de todos os dados pela tela de Configurações apaga os registros ativos e cópias antigas da nuvem.
 - Não publique regras de banco permissivas e não compartilhe senhas.
 
+## Ajustes desta versão
+
+- Corrigida a chamada de cálculo que impedia a tela Perfil de aparecer.
+- Removido o texto duplicado da meta diária na tela Início; o valor aparece uma única vez, em negrito e com “Kcal”.
+- No computador, foram preservados o tamanho, a disposição e o menu lateral originais. As funcionalidades e os textos permanecem compartilhados com a versão de celular; o painel completo de nutrição continua disponível no desktop.
+- No celular, o layout compacto e a navegação inferior permanecem inalterados.
+- A opção “Alimentos” saiu da navegação principal e fica no menu da engrenagem, logo abaixo de “Perfil”, como “Alimentos e Receitas”; o atalho foi removido da tela Configurações.
+- No Diário, “＋ Adicionar” abre um formulário identificado pelo nome da refeição, sem campo para escolher a refeição novamente.
+- A busca do Diário reúne alimentos e receitas, indica o tipo e sugere correspondências pelo início do nome digitado.
+- O resumo nutricional das receitas segue o padrão de alimentos, exibindo valores por 100 g.
+- No cadastro de receitas, os ingredientes são sugeridos ao digitar o início do nome do alimento.
+- Ao adicionar um consumo no Diário, a janela é maior e inclui as abas “Recentes” (até 20 alimentos e receitas usados recentemente) e “Favoritos”, além da busca no topo.
+- A Meta de hoje mostra a meta calórica uma única vez, em negrito.
+
 ## Funcionalidades preservadas
 
 O app mantém as abas Início, Diário, Alimentos, Treinos, Histórico, Relatórios, Perfil e Config. Inclui registro alimentar e de água, receitas, perfil e metas, fichas e séries de treino, cardio, histórico e exportação de backup/CSV.
