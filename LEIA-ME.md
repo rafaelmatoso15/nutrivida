@@ -64,6 +64,7 @@ Em **Config.**, é possível exportar um backup JSON. A importação substitui o
 - A busca do Diário reúne alimentos e receitas, indica o tipo e sugere correspondências pelo início do nome digitado.
 - O resumo nutricional das receitas segue o padrão de alimentos, exibindo valores por 100 g.
 - No cadastro de receitas, os ingredientes são sugeridos ao digitar o início do nome do alimento.
+- Ao adicionar um consumo no Diário, a janela é maior e inclui as abas “Recentes” (até 20 alimentos e receitas usados recentemente) e “Favoritos”, além da busca no topo.
 - A Meta de hoje mostra a meta calórica uma única vez, em negrito.
 
 ## Funcionalidades preservadas
