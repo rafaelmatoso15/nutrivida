@@ -103,3 +103,18 @@
 @media(max-width:680px){.bottom-nav{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));width:100%;overflow:hidden;justify-content:stretch;gap:0;padding-left:0;padding-right:0}.bottom-nav .nav-link{flex:1 1 0;min-width:0;width:100%;padding:6px 2px;font-size:10px;line-height:1.2;align-items:center;justify-content:center;gap:2px;white-space:nowrap}.bottom-nav .nav-icon{width:auto;font-size:25px;line-height:1.05}.plate-meal-head>div>div{min-width:0;max-width:100%}.plate-meal-head small,.plate-food small{overflow-wrap:anywhere}}
 .home-entry-card .row-main{flex:1;min-width:0}.home-entry-card .row-main small{display:block;white-space:nowrap;overflow:hidden;text-overflow:clip;font-size:clamp(10px,1vw,13px);font-variant-numeric:tabular-nums}.balance-estimate-values p{margin:4px 0!important;color:var(--text)!important}.balance-estimate-values+p{margin-top:12px!important}
 @media(max-width:680px){.home-entry-card .row-main small{font-size:clamp(9px,3vw,12px)}}
+
+/* Ações dos alimentos do Diário aparecem ao deslizar para a esquerda no celular */
+.plate-food-content{min-width:0;flex:1}
+@media(max-width:680px){
+ .plate-food-swipe{position:relative;overflow:hidden;padding:0!important;touch-action:pan-y}
+ .plate-food-swipe>.plate-food-content{display:flex;align-items:center;flex:0 0 100%;width:100%;min-width:100%;position:relative;z-index:1;padding:11px 1px;background:var(--panel);transition:transform .2s ease;will-change:transform}
+ .plate-food-content>div{width:100%;min-width:0}
+ .plate-food-content strong{display:block;overflow-wrap:anywhere}
+ .plate-food-content small{display:block;white-space:nowrap;overflow:hidden;text-overflow:clip;font-size:clamp(9px,2.6vw,11px);font-variant-numeric:tabular-nums}
+ .plate-food-actions{position:absolute;inset:0 0 0 auto;width:132px;display:flex;align-items:center;justify-content:center;gap:6px;padding:4px 6px;background:var(--panel2)}
+ .plate-food-actions .btn{flex:1 1 0;min-width:0;min-height:36px;padding:5px 6px;font-size:12px}
+ .plate-food-swipe.swipe-open>.plate-food-content{transform:translateX(-132px)}
+ .plate-meal-head>div>div{min-width:0;max-width:100%}
+ .plate-meal-head small{overflow-wrap:anywhere}
+}
