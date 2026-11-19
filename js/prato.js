@@ -6,7 +6,7 @@ function mealsFrom(settings){const meals=settings?.meals;if(!Array.isArray(meals
 function nutrientsOf(log){const out={};for(const k of NV.nutrients)out[k]=num(log[k]);return out}
 function total(logs){const out=Object.fromEntries(NV.nutrients.map(k=>[k,0]));logs.forEach(x=>NV.nutrients.forEach(k=>out[k]+=num(x[k])));return out}
 function progress(label,used,target,unit){const pct=target>0?Math.min(100,used/target*100):0;return `<div class="plate-meter"><div><span>${label}</span><b>${NV.fmt(used,1)} / ${NV.fmt(target,1)} ${unit}</b></div><div class="progress"><i style="width:${pct}%"></i></div></div>`}
-function nutrientShort(x){return `${NV.fmt(x.calories)} kcal · P ${NV.fmt(x.protein,1)} g · C ${NV.fmt(x.carbs,1)} g · G ${NV.fmt(x.fat,1)} g`}
+function nutrientShort(x){return `${NV.fmt(x.calories)} kcal · P ${NV.fmt(x.protein,1)} g · C ${NV.fmt(x.carbs,1)} g · G ${NV.fmt(x.fat,1)} g · F ${NV.fmt(x.fiber,1)} g`}
 function foodPer100(food){const f={};NV.nutrients.forEach(k=>f[k]=num(food[k])*100/Math.max(1,num(food.serving)||100));return f}
 function recipePerServing(recipe,foods){return NVRecipe.perServing(recipe,foods)}
 function mealTarget(targets,consumed,mealCount){return Object.fromEntries(['calories','protein','carbs','fat'].map(k=>[k,Math.max(0,num(targets[k])-num(consumed[k]))/Math.max(1,mealCount)]))}

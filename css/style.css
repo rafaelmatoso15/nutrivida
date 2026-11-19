@@ -98,3 +98,6 @@
  .plate-summary .plate-meter .progress{height:4px;margin:6px 0}
  .plate-summary .plate-meter small{font-size:10px;line-height:1.3;color:#c0d7ca}
 }
+
+/* Navegação inferior móvel: ocupar a largura inteira sem rolagem lateral */
+@media(max-width:680px){.bottom-nav{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));width:100%;overflow:hidden;justify-content:stretch;gap:0;padding-left:4px;padding-right:4px}.bottom-nav .nav-link{flex:1 1 0;min-width:0;width:100%;padding:5px 1px;font-size:10px;line-height:1.2}.bottom-nav .nav-icon{width:auto;font-size:22px;line-height:1.15}}
