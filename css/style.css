@@ -101,3 +101,5 @@
 
 /* Navegação inferior móvel: ocupar a largura inteira sem rolagem lateral */
 @media(max-width:680px){.bottom-nav{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));width:100%;overflow:hidden;justify-content:stretch;gap:0;padding-left:0;padding-right:0}.bottom-nav .nav-link{flex:1 1 0;min-width:0;width:100%;padding:6px 2px;font-size:10px;line-height:1.2;align-items:center;justify-content:center;gap:2px;white-space:nowrap}.bottom-nav .nav-icon{width:auto;font-size:25px;line-height:1.05}.plate-meal-head>div>div{min-width:0;max-width:100%}.plate-meal-head small,.plate-food small{overflow-wrap:anywhere}}
+.home-entry-card .row-main{flex:1;min-width:0}.home-entry-card .row-main small{display:block;white-space:nowrap;overflow:hidden;text-overflow:clip;font-size:clamp(10px,1vw,13px);font-variant-numeric:tabular-nums}.balance-estimate-values p{margin:4px 0!important;color:var(--text)!important}.balance-estimate-values+p{margin-top:12px!important}
+@media(max-width:680px){.home-entry-card .row-main small{font-size:clamp(9px,3vw,12px)}}
